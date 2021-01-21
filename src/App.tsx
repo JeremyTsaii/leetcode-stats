@@ -1,24 +1,43 @@
 import React from 'react'
-import logo from './logo.svg'
+import {
+  createMuiTheme,
+  ThemeProvider,
+  makeStyles,
+} from '@material-ui/core/styles'
+import Content from './components/Content'
 import './App.css'
 
-function App() {
+const mainTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#ff1744',
+    },
+    secondary: {
+      main: '#673ab7',
+    },
+    // Background colors
+    info: {
+      main: '#121212',
+      light: '#191b21',
+    },
+  },
+})
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    paddingTop: theme.spacing(20),
+  },
+}))
+
+function App(): JSX.Element {
+  const classes = useStyles()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={mainTheme}>
+      <div className={classes.root}>
+        <Content />
+      </div>
+    </ThemeProvider>
   )
 }
 

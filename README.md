@@ -32,23 +32,23 @@
 First clone the repository onto your local machine.
 You can then run the following commands:
 
-#### `yarn install`
+#### `npm install`
 
 Install all of the depedencies.
 
-#### `yarn run start`
+#### `npm run start`
 
 Runs the app in the development mode with live updates.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-#### `yarn run format:fix`
+#### `npm run format:fix`
 
 Formats the files with Prettier.<br />
 
-#### `yarn run lint:fix`
+#### `npm run lint:fix`
 
 Lints the files with ESLint.<br />
 
-#### `yarn run test`
+#### `npm run test`
 
 Runs the test suite. Make sure that all tests pass before committing/pushing!<br />

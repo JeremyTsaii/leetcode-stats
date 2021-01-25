@@ -18,6 +18,16 @@ export const defaultTheme = {
   med: '#ff9100',
   hard: '#f50057',
 }
+export const unknownTheme = {
+  value: 'unknown',
+  background: '',
+  title: '',
+  text: '',
+  circle: '',
+  easy: '',
+  med: '',
+  hard: '',
+}
 export const themes = {
   light: defaultTheme,
   dark: {

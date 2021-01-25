@@ -13,22 +13,25 @@ export default async (req: NowRequest, res: NowResponse) => {
   res.setHeader('Cache-Control', 'public, max-age=1800')
 
   try {
-    if (username) {
-      const user = username as string
-      const userTheme = theme ? getTheme((theme as string).toLowerCase()) : getTheme('light')
-
-      const stats = await getStats(user)
-      
-      if (stats.status === 'success') {
-        return res.send(getSuccessSvg({stats, username: user, theme: userTheme}))
-      } else { // user does not exist
-        return res.send(getErrorSvg(stats.message))
-      }
-    } else { // user did not enter username
+    if (!username) { // user did not enter username
       return res.send(getErrorSvg('please enter a username (ex: username=leetcodeuser)'))
+    }
+
+    const user = username as string
+    const userTheme = theme ? getTheme((theme as string).toLowerCase()) : getTheme('light')
+
+    if (userTheme.value === 'unknown') { // user entered invalid theme
+      return res.send(getErrorSvg('please enter a valid theme'))
+    }
+
+    const stats = await getStats(user)
+  
+    if (stats.status === 'success') {
+      return res.send(getSuccessSvg({stats, username: user, theme: userTheme}))
+    } else { // user does not exist
+      return res.send(getErrorSvg(stats.message))
     }
   } catch { // unknown backend error
     return res.send(getErrorSvg('backend error occurred'))
   }
-
 }

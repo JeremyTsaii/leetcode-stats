@@ -61,6 +61,12 @@ export const getSuccessSvg = (info: SvgInfo): string => {
         animation: scaleInAnimation 0.3s ease-in-out forwards;
       }
       
+      .acceptance-title {
+        font: 600 14px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif;
+        fill: ${text};
+        animation: scaleInAnimation 0.3s ease-in-out forwards;
+      }
+
       .bold {
         font-weight: 700
       }
@@ -122,10 +128,9 @@ export const getSuccessSvg = (info: SvgInfo): string => {
         <g transform="translate(400, 47.5)">
           <circle class="acceptance-circle-rim" cx="-10" cy="8" r="60" />
           <circle class="acceptance-circle" cx="-10" cy="8" r="60" />
-          <g class="acceptance-text">
-            <text x="0" y="0" alignment-baseline="central" dominant-baseline="central" text-anchor="middle"> ${acceptanceRate}% </text>
+          <text class="acceptance-text" x="0" y="0" alignment-baseline="central" dominant-baseline="central" text-anchor="middle"> ${acceptanceRate}% </text>
+          <text class="acceptance-title" x="0" y="20" alignment-baseline="central" dominant-baseline="central" text-anchor="middle"> acceptance </text>
           </g>
-        </g>
         <svg x="0" y="0">
           <g transform="translate(0, 0)">
             <g class="stagger" style="animation-delay: 450ms" transform="translate(25, 0)">

@@ -18,9 +18,9 @@ export const defaultTheme = {
   med: '#ff9100',
   hard: '#f50057',
 }
-export const themes = [
-  defaultTheme,
-  {
+export const themes = {
+  light: defaultTheme,
+  dark: {
     value: 'Dark',
     background: '#121212',
     title: '#757de8',
@@ -30,4 +30,4 @@ export const themes = [
     med: '#ff9100',
     hard: '#f73378',
   },
-]
+}

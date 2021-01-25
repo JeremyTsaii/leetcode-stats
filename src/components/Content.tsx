@@ -1,5 +1,6 @@
 /* eslint-disable react/no-danger */
 import React, { useState, useRef } from 'react'
+import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Paper, TextField, MenuItem, Typography } from '@material-ui/core'
 import GitHubIcon from '@material-ui/icons/GitHub'
@@ -7,9 +8,9 @@ import BubbleChartIcon from '@material-ui/icons/BubbleChart'
 import ImageIcon from '@material-ui/icons/Image'
 import BorderColorIcon from '@material-ui/icons/BorderColor'
 import IconButton from './IconButton'
-import { ThemeType, defaultTheme, themes } from '../static/themes'
-import { getStatsReq } from '../utils/getStats'
-import { getSvg } from '../utils/getSvg'
+import { themes } from '../static/themes'
+
+const ENDPOINT = 'https://leetcode-stats.vercel.app'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -61,12 +62,11 @@ function Content(): JSX.Element {
   }
 
   // Theme
-  const [theme, setTheme] = useState<ThemeType>(defaultTheme)
+  const [theme, setTheme] = useState('Light')
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event
-    const newTheme = JSON.parse(target.value) as ThemeType
-    setTheme(newTheme)
+    setTheme(target.value)
   }
 
   // Status
@@ -108,26 +108,36 @@ function Content(): JSX.Element {
       return
     }
 
-    const stats = getStatsReq(username)
-    stats.then((data) => {
-      if (data.status === 'success') {
-        setSvg(getSvg({ stats: data, username, theme }))
+    axios
+      .get(`${ENDPOINT}/api?username=${username}&theme=${theme}`)
+      .then((response) => {
+        setSvg(response.data as string)
         setGenerated(true)
         setStatusText('Status: successfully generated')
-      } else {
+      })
+      .catch(() => {
         setGenerated(false)
-        setStatusText(`Status: ${data.message}`)
-      }
-    })
+        setStatusText(`Status: backend error occurred`)
+      })
   }
 
   // onClick function for copy image button
   const imgCopyOnClick = () => {
+    const username = getValue(nameRef)
+    navigator.clipboard.writeText(
+      `${ENDPOINT}/api?username=${username}&theme=${theme}`,
+    )
     setImgCopied(true)
   }
 
   // onClick function for copy markdwn button
   const mdCopyOnClick = () => {
+    const username = getValue(nameRef)
+    const imgUrl = `${ENDPOINT}/api?username=${username}&theme=${theme}`
+    const redirectUrl = 'https://github.com/JeremyTsaii/leetcode-stats'
+    navigator.clipboard.writeText(
+      `[![${username}'s LeetCode Stats](${imgUrl})](${redirectUrl})`,
+    )
     setMdcopied(true)
   }
 
@@ -168,7 +178,7 @@ function Content(): JSX.Element {
             fullWidth
             select
             label="Theme"
-            value={JSON.stringify(theme)}
+            value={theme}
             onChange={handleThemeChange}
             InputLabelProps={{
               className: classes.textFieldLabel,
@@ -176,11 +186,14 @@ function Content(): JSX.Element {
             InputProps={{
               className: classes.textInput,
             }}>
-            {themes.map((themeX) => (
-              <MenuItem key={themeX.value} value={JSON.stringify(themeX)}>
-                {themeX.value}
-              </MenuItem>
-            ))}
+            {Object.keys(themes).map((themeX) => {
+              const key = themeX as keyof typeof themes
+              return (
+                <MenuItem key={themes[key].value} value={themes[key].value}>
+                  {themes[key].value}
+                </MenuItem>
+              )
+            })}
           </TextField>
         </div>
         <div

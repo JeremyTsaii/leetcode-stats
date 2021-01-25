@@ -11,9 +11,9 @@ export type ThemeType = {
 export const defaultTheme = {
   value: 'Light',
   background: '#fffefe',
-  title: '#2f80ed',
+  title: '#d500f9',
   text: '#333',
-  circle: '#2f80ed',
+  circle: '#d500f9',
   easy: '#00e676',
   med: '#ff9100',
   hard: '#f73378',
@@ -23,9 +23,9 @@ export const themes = [
   {
     value: 'Dark',
     background: '#121212',
-    title: '#fe428e',
+    title: '#757de8',
     text: '#a9fef7',
-    circle: '#fe428e',
+    circle: '#757de8',
     easy: '#00e676',
     med: '#ff9100',
     hard: '#f73378',

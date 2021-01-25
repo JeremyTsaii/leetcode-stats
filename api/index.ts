@@ -20,15 +20,15 @@ export default async (req: NowRequest, res: NowResponse) => {
       const stats = await getStats(user)
       
       if (stats.status === 'success') {
-        return getSuccessSvg({stats, username: user, theme: userTheme})
+        return res.send(getSuccessSvg({stats, username: user, theme: userTheme}))
       } else { // user does not exist
-        return getErrorSvg(stats.message)
+        return res.send(getErrorSvg(stats.message))
       }
     } else { // user did not enter username
-      return getErrorSvg('please enter a username (ex: username=leetcodeuser)')
+      return res.send(getErrorSvg('please enter a username (ex: username=leetcodeuser)'))
     }
   } catch { // unknown backend error
-    return getErrorSvg('backend error occurred')
+    return res.send(getErrorSvg('backend error occurred'))
   }
 
 }

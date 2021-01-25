@@ -1,10 +1,12 @@
 import axios from 'axios'
 
-const ENDPOINT = ''
+const ENDPOINT = 'https://leetcode-stats-api.herokuapp.com/'
 
-interface StatsResponse {
+export interface StatsResponse {
   status: string
+  message: string
   totalSolved?: number
+  totalQuestions?: number
   easySolved?: number
   totalEasy?: number
   mediumSolved?: number
@@ -17,16 +19,12 @@ interface StatsResponse {
   reputation?: number
 }
 
-const getStatsReq = (): StatsResponse => {
-  axios
-    .get(ENDPOINT)
-    .then((response) => {
-      return response
-    })
-    .catch(() => {
-      return { status: 'error' }
-    })
-  return { status: 'error' }
+export const getStatsReq = async (username: string): Promise<StatsResponse> => {
+  try {
+    const response = await axios.get(`${ENDPOINT}/${username}/`)
+    return response.data as StatsResponse
+  } catch {
+    const errMsg = 'could not reach backend, try again later.'
+    return { status: 'error', message: errMsg }
+  }
 }
-
-export default getStatsReq

@@ -7,20 +7,28 @@ import ImageIcon from '@material-ui/icons/Image'
 import BorderColorIcon from '@material-ui/icons/BorderColor'
 import IconButton from './IconButton'
 import { ThemeType, defaultTheme, themes } from '../static/themes'
-import getStatsReq from '../utils/getStats'
+import { getStatsReq } from '../utils/getStats'
+import { getSvg } from '../utils/getSvg'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     margin: 'auto',
     backgroundColor: theme.palette.info.light,
-    height: theme.spacing(70),
-    width: '40%',
+    height: '100%',
+    width: '50%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
     fontSize: theme.spacing(5),
+  },
+  successStatus: {
+    color: theme.palette.primary.main,
+  },
+  errorStatus: {
+    color: theme.palette.secondary.main,
   },
   colSection: {
     padding: theme.spacing(2),
@@ -46,18 +54,37 @@ function Content(): JSX.Element {
   // Username
   const nameRef = useRef('')
 
+  const getValue = (ref: React.MutableRefObject<string>): string => {
+    const cur = (ref.current as unknown) as HTMLTextAreaElement
+    return cur.value
+  }
+
   // Theme
   const [theme, setTheme] = useState<ThemeType>(defaultTheme)
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const target = (event.target as unknown) as ThemeType
-    setTheme(target)
+    const { target } = event
+    const newTheme = JSON.parse(target.value) as ThemeType
+    setTheme(newTheme)
   }
+
+  // Status
+  const [statusText, setStatusText] = useState('Status: awaiting generation')
 
   // Action buttons
   const [generated, setGenerated] = useState(false)
   const [imgCopied, setImgCopied] = useState(false)
   const [mdCopied, setMdcopied] = useState(false)
+
+  // Dynamic svg component
+  const [svg, setSvg] = useState('')
+
+  const resetStates = () => {
+    setImgCopied(false)
+    setMdcopied(false)
+    setSvg('')
+    setGenerated(false)
+  }
 
   // onClick function for git button
   const gitOnClick = () => {
@@ -70,8 +97,27 @@ function Content(): JSX.Element {
 
   // onClick function for generate button
   const genOnClick = () => {
-    setGenerated(true)
-    getStatsReq()
+    resetStates()
+    setStatusText('Status: generating...')
+
+    const username = getValue(nameRef)
+    // User did not enter username
+    if (username === '') {
+      setStatusText('Status: please enter username above')
+      return
+    }
+
+    const stats = getStatsReq(username)
+    stats.then((data) => {
+      if (data.status === 'success') {
+        setSvg(getSvg({ stats: data, username, theme }))
+        setGenerated(true)
+        setStatusText('Status: successfully generated')
+      } else {
+        setGenerated(false)
+        setStatusText(`Status: ${data.message}`)
+      }
+    })
   }
 
   // onClick function for copy image button
@@ -89,7 +135,7 @@ function Content(): JSX.Element {
       <Paper elevation={12} className={classes.paper}>
         <div className={classes.colSection}>
           <Typography
-            color="secondary"
+            color="primary"
             align="center"
             variant="h2"
             className={classes.text}>
@@ -98,7 +144,7 @@ function Content(): JSX.Element {
           <IconButton
             text="GitHub"
             icon={<GitHubIcon />}
-            color="secondary"
+            color="primary"
             onClick={gitOnClick}
           />
         </div>
@@ -121,7 +167,7 @@ function Content(): JSX.Element {
             fullWidth
             select
             label="Theme"
-            value={theme.value}
+            value={JSON.stringify(theme)}
             onChange={handleThemeChange}
             InputLabelProps={{
               className: classes.textFieldLabel,
@@ -130,20 +176,25 @@ function Content(): JSX.Element {
               className: classes.textInput,
             }}>
             {themes.map((themeX) => (
-              <MenuItem key={themeX.value} value={themeX.value}>
+              <MenuItem key={themeX.value} value={JSON.stringify(themeX)}>
                 {themeX.value}
               </MenuItem>
             ))}
           </TextField>
         </div>
+        <div
+          className={generated ? classes.successStatus : classes.errorStatus}>
+          {statusText}
+        </div>
         <div className={classes.rowSection}>
           <IconButton
-            text={generated ? 'Successfully Generated' : 'Generate'}
+            text="Generate"
             icon={<BubbleChartIcon />}
             color="primary"
             onClick={genOnClick}
           />
         </div>
+        <div dangerouslySetInnerHTML={{ __html: svg }} />
         {generated && (
           <div className={classes.rowSection}>
             <IconButton

@@ -1,6 +1,7 @@
 export type ThemeType = {
   value: string
   background: string
+  title: string
   text: string
   circle: string
   easy: string
@@ -9,22 +10,24 @@ export type ThemeType = {
 }
 export const defaultTheme = {
   value: 'Light',
-  background: '',
-  text: '',
-  circle: '',
-  easy: '',
-  med: '',
-  hard: '',
+  background: '#fffefe',
+  title: '#2f80ed',
+  text: '#333',
+  circle: '#2f80ed',
+  easy: '#00e676',
+  med: '#ff9100',
+  hard: '#f73378',
 }
 export const themes = [
   defaultTheme,
   {
     value: 'Dark',
-    background: '',
-    text: '',
-    circle: '',
-    easy: '',
-    med: '',
-    hard: '',
+    background: '#121212',
+    title: '#fe428e',
+    text: '#a9fef7',
+    circle: '#fe428e',
+    easy: '#00e676',
+    med: '#ff9100',
+    hard: '#f73378',
   },
 ]

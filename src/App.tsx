@@ -13,7 +13,7 @@ const mainTheme = createMuiTheme({
       main: '#33eb91',
     },
     secondary: {
-      main: '#33eb91',
+      main: '#f73378',
     },
     // Background colors
     info: {
@@ -23,10 +23,8 @@ const mainTheme = createMuiTheme({
   },
 })
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    paddingTop: theme.spacing(20),
-  },
+const useStyles = makeStyles(() => ({
+  root: {},
 }))
 
 function App(): JSX.Element {

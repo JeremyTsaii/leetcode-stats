@@ -14,9 +14,9 @@ export const defaultTheme = {
   title: '#d500f9',
   text: '#333',
   circle: '#d500f9',
-  easy: '#00e676',
+  easy: '#00a152',
   med: '#ff9100',
-  hard: '#f73378',
+  hard: '#f50057',
 }
 export const themes = [
   defaultTheme,

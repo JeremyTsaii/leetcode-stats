@@ -20,7 +20,7 @@ export default async (req: NowRequest, res: NowResponse) => {
       const stats = await getStats(user)
       
       if (stats.status === 'success') {
-        getSuccessSvg({stats, username: user, theme: userTheme})
+        return getSuccessSvg({stats, username: user, theme: userTheme})
       } else { // user does not exist
         return getErrorSvg(stats.message)
       }

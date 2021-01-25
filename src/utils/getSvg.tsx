@@ -112,7 +112,7 @@ export const getSuccessSvg = (info: SvgInfo): string => {
         }
       }
       </style>
-      <rect x="0.5" y="0.5" rx="4.5" height="99%" stroke="${background}" width="494" fill=${background} stroke-opacity="1" />
+      <rect x="0.5" y="0.5" rx="4.5" height="99%" stroke="${background}" width="494" fill="${background}" stroke-opacity="1" />
       <g transform="translate(25, 35)">
         <g transform="translate(0, 0)">
           <text x="0" y="0" class="header">${username}'s LeetCode Stats</text>

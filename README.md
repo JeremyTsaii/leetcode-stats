@@ -27,6 +27,43 @@
     <img src=./powered-by-vercel.svg></a>
 </p>
 
+Backend Repo is [here](https://github.com/JeremyTsaii/leetcode-stats-api).
+
+## How to use?
+Simply copy the following markdown and replace `<USERNAME>` and `<THEME>` with your username and chosen theme.
+
+```
+[![<USERNAME>'s LeetCode Stats](https://leetcode-stats.vercel.app/api?username<USERNAME>&theme=<THEME>)](https://github.com/JeremyTsaii/leetcode-stats)
+```
+
+Alternatively, go to the web app [here](https://leetcode-stats.vercel.app/), type in your username and select your theme, then click "Generate". You can copy the Image URL or Markdown from there.
+
+For the raw SVG, hit the endpoint below (replacing `<USERNAME>` and `<THEME>`)
+
+Invoke URL: `https://leetcode-stats.vercel.app/api?username<USERNAME>&theme=<THEME>`
+
+## Possible Themes (more on the way!)
+- Light (default)
+- Dark
+
+## Example Displays
+
+Light Mode:
+
+[![jetsai's LeetCode Stats](https://leetcode-stats.vercel.app/api?username=jetsai&theme=Light)](https://github.com/JeremyTsaii/leetcode-stats)
+
+```
+[![jetsai's LeetCode Stats](https://leetcode-stats.vercel.app/api?username=jetsai&theme=Light)](https://github.com/JeremyTsaii/leetcode-stats)
+```
+
+Dark Mode:
+
+[![jetsai's LeetCode Stats](https://leetcode-stats.vercel.app/api?username=jetsai&theme=Dark)](https://github.com/JeremyTsaii/leetcode-stats)
+
+```
+[![jetsai's LeetCode Stats](https://leetcode-stats.vercel.app/api?username=jetsai&theme=Dark)](https://github.com/JeremyTsaii/leetcode-stats)
+```
+
 ## What is the development workflow?
 
 First clone the repository onto your local machine.
@@ -52,3 +89,4 @@ Lints the files with ESLint.<br />
 #### `npm run test`
 
 Runs the test suite. Make sure that all tests pass before committing/pushing!<br />
+

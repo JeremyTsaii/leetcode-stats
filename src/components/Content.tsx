@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { useState, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Paper, TextField, MenuItem, Typography } from '@material-ui/core'

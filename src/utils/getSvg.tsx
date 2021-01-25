@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { StatsResponse } from './getStats'
 import { ThemeType } from '../static/themes'
 

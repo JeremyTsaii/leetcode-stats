@@ -55,7 +55,7 @@ export const themes = {
     background: '#004d40',
     title: '#4dd0e1',
     text: '#00bcd4',
-    circle: '#ad1457',
+    circle: '#4dd0e1',
     easy: '#00e676',
     med: '#ff9100',
     hard: '#f73378',

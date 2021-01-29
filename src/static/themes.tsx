@@ -40,4 +40,24 @@ export const themes = {
     med: '#ff9100',
     hard: '#f73378',
   },
+  raspberry: {
+    value: 'Raspberry',
+    background: '#121212',
+    title: '#ad1457',
+    text: '#8e24aa',
+    circle: '#ad1457',
+    easy: '#00e676',
+    med: '#ff9100',
+    hard: '#f73378',
+  },
+  mist: {
+    value: 'Mist',
+    background: '#004d40',
+    title: '#4dd0e1',
+    text: '#00bcd4',
+    circle: '#ad1457',
+    easy: '#00e676',
+    med: '#ff9100',
+    hard: '#f73378',
+  }
 }

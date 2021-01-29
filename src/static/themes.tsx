@@ -59,5 +59,5 @@ export const themes = {
     easy: '#00e676',
     med: '#ff9100',
     hard: '#f73378',
-  }
+  },
 }

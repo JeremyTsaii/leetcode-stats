@@ -33,14 +33,14 @@ Backend Repo is [here](https://github.com/JeremyTsaii/leetcode-stats-api).
 Simply copy the following markdown and replace `<USERNAME>` and `<THEME>` with your username and chosen theme.
 
 ```
-[![<USERNAME>'s LeetCode Stats](https://leetcode-stats.vercel.app/api?username<USERNAME>&theme=<THEME>)](https://github.com/JeremyTsaii/leetcode-stats)
+[![<USERNAME>'s LeetCode Stats](https://leetcode-stats.vercel.app/api?username=<USERNAME>&theme=<THEME>)](https://github.com/JeremyTsaii/leetcode-stats)
 ```
 
 Alternatively, go to the web app [here](https://leetcode-stats.vercel.app/), type in your username and select your theme, then click "Generate". You can copy the Image URL or Markdown from there.
 
 For the raw SVG, hit the endpoint below (replacing `<USERNAME>` and `<THEME>`)
 
-Invoke URL: `https://leetcode-stats.vercel.app/api?username<USERNAME>&theme=<THEME>`
+Invoke URL: `https://leetcode-stats.vercel.app/api?username=<USERNAME>&theme=<THEME>`
 
 ## Possible Themes (more on the way!)
 - Light (default)

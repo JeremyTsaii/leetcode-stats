@@ -60,4 +60,14 @@ export const themes = {
     med: '#ff9100',
     hard: '#f73378',
   },
+  black_ice: {
+    value: 'Black ice',
+    background: '#151515',
+    title: '#00E7FF',
+    text: '#E2E2E2',
+    circle: '00E7FF',
+    easy: '#00FA9A',
+    med: '#f1bc00',
+    hard: '#f63636',
+  },
 }
